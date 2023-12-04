@@ -1,4 +1,9 @@
 const routes = {
-    "/": "index",
-    "/about": "about",
+    "/": {
+        component: "index",
+    },
+    "/about": {
+        component: "about",
+    },
+    // "/about": "about",
 }

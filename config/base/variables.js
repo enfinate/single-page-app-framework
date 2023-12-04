@@ -2,6 +2,7 @@ const base = {
     "folder": "/cu/",
     "host": window.location.hostname,
     "protocol": window.location.protocol,
+    "errorComponent":"config/error/404.html",
     // "url": this.folder+this.host,
     "js":[
         {
