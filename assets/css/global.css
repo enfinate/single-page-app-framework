@@ -1,0 +1,28 @@
+a{
+    cursor: pointer;
+}
+
+body{
+    /* background-color: black; */
+}
+menu ul{
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+
+menu ul li a{
+    font-weight: 100;
+    color: white;
+    margin: 0 20px;
+    padding-bottom:3px;
+    margin-top:3px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+    transition: .2s;
+}
+menu ul li a:hover{
+    color: aquamarine;
+    border-bottom: 1px solid rgba(255, 255, 255, 1);
+}

@@ -1,5 +1,5 @@
 const base = {
-    "folder": "/cu/",
+    "folder": "/athershahid/",
     "host": window.location.hostname,
     "protocol": window.location.protocol,
     "errorComponent":"config/error/404.html",
@@ -23,6 +23,10 @@ const base = {
         {
             "cdn":"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css",
             "description":"Bootstrap v5 style CDN",
+        },
+        {
+            "cdn":"./assets/css/global.css",
+            "description":"This is a global style page",
         },
         // Add additional style CDN here
     ]

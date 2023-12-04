@@ -27,14 +27,14 @@ class ASMM{
             return "/"+currentRoute
         }
 
-        window.addEventListener('load', function(event) {
+        window.addEventListener('load', function() {
             let changed = window.location.href
             history.pushState({}, newTitle, changed);
             let currentRoute=(changed).split(base.host+base.folder)[1]
             callPage("/"+currentRoute)
         });
 
-        window.addEventListener('popstate', function(event) {
+        window.addEventListener('popstate', function() {
             let changed = window.location.href
             history.pushState({}, newTitle, changed);
             let currentRoute=(changed).split(base.host+base.folder)[1]
@@ -54,7 +54,9 @@ class ASMM{
                         e.addEventListener('click', ()=>{
                             if(e.hasAttribute('redirect')){
                                 e.preventDefault;
+                                
                                 fetchComp = changePage(e.getAttribute('redirect'))
+                                customElements.define('component', ComponentElement);
                                 callPage(fetchComp)
                             }
                         })
@@ -74,7 +76,9 @@ class ASMM{
                         e.addEventListener('click', ()=>{
                             if(e.hasAttribute('redirect')){
                                 e.preventDefault;
+                                
                                 fetchComp = changePage(e.getAttribute('redirect'))
+                                customElements.define('component', ComponentElement);
                                 callPage(fetchComp)
                             }
                         })
