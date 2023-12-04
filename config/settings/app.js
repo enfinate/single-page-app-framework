@@ -1,7 +1,7 @@
 class ASMM{
     constructor(){
 
-        var newTitle = 'New Page Title';
+        var newTitle = '';
 
         let script=[],link=[], fetchComp="";
 
@@ -68,6 +68,7 @@ class ASMM{
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById("index").innerHTML = html
+                    document.title = typeof routes[page].title === 'undefined' ? 'No title' : routes[page].title
 
                     document.querySelectorAll('a').forEach((e)=>{
                         e.addEventListener('click', ()=>{
