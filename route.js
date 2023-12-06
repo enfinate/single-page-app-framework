@@ -1,6 +1,6 @@
 const routes = {
     "/": {
         component: "home",
-        title: "Merina - Home"
+        title: "Ather Shahid | Home"
     },
 }

@@ -3,7 +3,6 @@ const base = {
     "host": window.location.hostname,
     "protocol": window.location.protocol,
     "errorComponent":"config/error/404.html",
-    // "url": this.folder+this.host,
     "js":[
         {
             "cdn":"https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js",
@@ -14,10 +13,13 @@ const base = {
             "description":"Bootstrap v5 script CDN",
         },
         // {
-        //     "src":"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js",
-        //     "description":"Bootstrap v5 bundle CDN",
+        //     "cdn":"https://athershahid.com/cdn/slider/min.js",
+        //     "description":""
         // },
-        // Add additional script CDN here
+        /* Add additional script below */
+
+
+
     ],
     "css":[
         {
@@ -28,6 +30,8 @@ const base = {
             "cdn":"./assets/css/global.css",
             "description":"This is a global style page",
         },
-        // Add additional style CDN here
+        /* Add additional style below */
+
+
     ]
 };

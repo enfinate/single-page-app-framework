@@ -13,8 +13,6 @@ class ComponentElement extends HTMLElement {
             console.error('Error fetching the file:', error);
         });
 
-
-        // this.textContent = includeContent; // Set the content of the element to the value of the include attribute
       }
     }
   

@@ -2,7 +2,6 @@ class ASMM{
     constructor(){
 
         var newTitle = '';
-
         let script=[],link=[], fetchComp="";
 
         for(let i=0; i<(base.css).length; i++){
@@ -28,35 +27,36 @@ class ASMM{
         }
 
         window.addEventListener('load', function() {
-            let changed = window.location.href
-            history.pushState({}, newTitle, changed);
-            let currentRoute=(changed).split(base.host+base.folder)[1]
-            callPage("/"+currentRoute)
+            reuse()
         });
 
         window.addEventListener('popstate', function() {
+            reuse()
+        });
+
+        function reuse(){
             let changed = window.location.href
             history.pushState({}, newTitle, changed);
             let currentRoute=(changed).split(base.host+base.folder)[1]
             callPage("/"+currentRoute)
-        });
+        }
 
         function callPage(page){
             
+            document.querySelectorAll('a').forEach((element) => {
+                element.removeEventListener('click', clickHandler);
+            });
+
             if( typeof routes[page] === "undefined" ){
-                // alert("no page found")
                 fetch(base.errorComponent)
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById("index").innerHTML = html
-
                     document.querySelectorAll('a').forEach((e)=>{
                         e.addEventListener('click', ()=>{
                             if(e.hasAttribute('redirect')){
                                 e.preventDefault;
-                                
                                 fetchComp = changePage(e.getAttribute('redirect'))
-                                customElements.define('component', ComponentElement);
                                 callPage(fetchComp)
                             }
                         })
@@ -71,23 +71,24 @@ class ASMM{
                 .then(html => {
                     document.getElementById("index").innerHTML = html
                     document.title = typeof routes[page].title === 'undefined' ? 'No title' : routes[page].title
-
-                    document.querySelectorAll('a').forEach((e)=>{
-                        e.addEventListener('click', ()=>{
-                            if(e.hasAttribute('redirect')){
-                                e.preventDefault;
-                                
-                                fetchComp = changePage(e.getAttribute('redirect'))
-                                customElements.define('component', ComponentElement);
-                                callPage(fetchComp)
-                            }
+                    setTimeout(()=>{
+                        document.querySelectorAll('a').forEach((e)=>{
+                            e.addEventListener('click', clickHandler)
                         })
-                    })
+                    },2500)
                 })
-                .catch(error => {
+                .catch(error => { 
                     console.error('Error fetching the file:', error);
                 });
 
+            }
+        }
+
+        function clickHandler(event) {
+            event.preventDefault();
+            if (event.target.hasAttribute('redirect')) {
+                fetchComp = changePage(event.target.getAttribute('redirect'));
+                callPage(fetchComp);
             }
         }
 
