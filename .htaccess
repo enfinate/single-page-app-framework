@@ -1,12 +1,13 @@
 ReWriteEngine On
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteCond %{REQUEST_URI} !/$
-RewriteRule ^(.*)$ $1\.html [L]
+# RewriteCond %{REQUEST_FILENAME}.html -f
+# RewriteCond %{REQUEST_URI} !/$
+# RewriteRule ^(.*)$ $1\.html [L]
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /cu/
+    RewriteBase /simple-js/
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ index.html?url=$1 [QSA,L]
 </IfModule>
+

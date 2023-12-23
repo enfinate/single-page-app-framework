@@ -1,6 +1,8 @@
 const routes = {
     "/": {
         component: "home",
-        title: "Ather Shahid | Home"
+        title: "ASMM | Simple JS"
     },
+    // Create route for your views here
+     
 }

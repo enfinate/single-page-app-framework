@@ -1,6 +1,5 @@
 class ASMM{
     constructor(){
-
         var newTitle = '';
         let script=[],link=[], fetchComp="";
 
@@ -26,13 +25,8 @@ class ASMM{
             return "/"+currentRoute
         }
 
-        window.addEventListener('load', function() {
-            reuse()
-        });
-
-        window.addEventListener('popstate', function() {
-            reuse()
-        });
+        window.addEventListener('load', () =>  reuse() );
+        window.addEventListener('popstate', () => reuse() );
 
         function reuse(){
             let changed = window.location.href
@@ -40,26 +34,32 @@ class ASMM{
             let currentRoute=(changed).split(base.host+base.folder)[1]
             callPage("/"+currentRoute)
         }
-
         function callPage(page){
-            
-            document.querySelectorAll('a').forEach((element) => {
-                element.removeEventListener('click', clickHandler);
-            });
+            document.querySelectorAll('a').forEach((e) => {
+                e.removeEventListener('click', clickHandler);
+            })
 
+            document.getElementById("index").innerHTML=preloaderContent
             if( typeof routes[page] === "undefined" ){
                 fetch(base.errorComponent)
                 .then(response => response.text())
                 .then(html => {
+                    document.title = "Error 404"
                     document.getElementById("index").innerHTML = html
+                    onPageLoad()
                     document.querySelectorAll('a').forEach((e)=>{
-                        e.addEventListener('click', ()=>{
-                            if(e.hasAttribute('redirect')){
-                                e.preventDefault;
-                                fetchComp = changePage(e.getAttribute('redirect'))
-                                callPage(fetchComp)
+
+                        e.addEventListener('click', clickHandler)
+
+                        e.style.pointerEvents="all"
+                        
+                        if(e.hasAttribute('redirect')){
+                            if(e.getAttribute('redirect')==""){
+                                e.href=window.location.protocol+'//'+window.location.host+base.folder
+                            }else{
+                                e.href=e.getAttribute('redirect')
                             }
-                        })
+                        }
                     })
                 })
                 .catch(error => {
@@ -70,28 +70,54 @@ class ASMM{
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById("index").innerHTML = html
+                    onPageLoad()
                     document.title = typeof routes[page].title === 'undefined' ? 'No title' : routes[page].title
+                    document.querySelectorAll('a').forEach((e)=>{
+
+                        e.addEventListener('click', clickHandler)
+
+                        e.style.pointerEvents="all"
+                        
+                        if(e.hasAttribute('redirect')){
+                            if(e.getAttribute('redirect')==""){
+                                e.href=window.location.protocol+'//'+window.location.host+base.folder
+                            }else{
+                                e.href=e.getAttribute('redirect')
+                            }
+                        }
+                    })
                     setTimeout(()=>{
                         document.querySelectorAll('a').forEach((e)=>{
+
                             e.addEventListener('click', clickHandler)
+
+                            e.style.pointerEvents="all"
+                            
+                            if(e.hasAttribute('redirect')){
+                                if(e.getAttribute('redirect')==""){
+                                    e.href=window.location.protocol+'//'+window.location.host+base.folder
+                                }else{
+                                    e.href=e.getAttribute('redirect')
+                                }
+                            }
                         })
                     },2500)
                 })
                 .catch(error => { 
                     console.error('Error fetching the file:', error);
                 });
-
             }
         }
-
         function clickHandler(event) {
-            event.preventDefault();
+            event.target.style.pointerEvents="none"
             if (event.target.hasAttribute('redirect')) {
+                event.target.href=event.target.getAttribute('redirect');
+                event.preventDefault();
                 fetchComp = changePage(event.target.getAttribute('redirect'));
                 callPage(fetchComp);
+                // event.target.style.pointerEvents="all"
             }
         }
-
     }
 }
 

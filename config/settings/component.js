@@ -19,22 +19,7 @@ class ComponentElement extends HTMLElement {
     static get observedAttributes() {
       return ['include'];
     }
-  
-    attributeChangedCallback(name, oldValue, newValue) {
-      if (name === 'include') {
-        
-        fetch('./assets/component/'+includeContent+'.html')
-        .then(response => response.text())
-        .then(html => {
-            this.innerHTML = html
-        })
-        .catch(error => {
-            console.error('Error fetching the file:', error);
-        }); // Set the content of the element to the value of the include attribute
-
-      }
-    }
-  
+   
     get include() {
       return this.getAttribute('include');
     }
