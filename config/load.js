@@ -2,8 +2,17 @@
 let preloaderContent = ``
 
 function onPageLoad(){
-    let viser = window.location.href
-    let currentDirr="/"+viser.split(base.host+base.folder)[1]
-    // write your page renders below
+    
+    switch(_dir()){
+        case "/":
+
+        break;
+        case "/about":
+
+            // alert(param("new"))
+
+        break;
+    }
+
 
 }

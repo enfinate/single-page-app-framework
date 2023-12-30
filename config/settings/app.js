@@ -39,6 +39,8 @@ class ASMM{
                 e.removeEventListener('click', clickHandler);
             })
 
+            page = page.split("?")[0]
+
             document.getElementById("index").innerHTML=preloaderContent
             if( typeof routes[page] === "undefined" ){
                 fetch(base.errorComponent)
@@ -122,3 +124,15 @@ class ASMM{
 }
 
 const asmm = new ASMM()
+
+const _dir = () => {
+    let viser = window.location.href
+    return ("/"+viser.split(base.host+base.folder)[1]).split("?")[0]
+}
+
+const param = (val) => {
+    let url = window.location.search;
+    let params = new URLSearchParams(url);
+    let nameValue = params.get(val); 
+    return nameValue   
+}
